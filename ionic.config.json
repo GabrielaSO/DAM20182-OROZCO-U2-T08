@@ -1,0 +1,7 @@
+{
+  "name": "DAM20182-OROZCO-U2-T08",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
