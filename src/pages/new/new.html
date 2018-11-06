@@ -8,79 +8,140 @@
 
 
 <ion-content padding>
-  <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate>
-
-    <ion-list>
+  <!--<form [formGroup]="validations_form" (ngSubmit)="saveData()" novalidate>-->
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="addPerson(validations_form.value)">
 
       <!--RFC-->
       <ion-item>
         <ion-input formControlName="rfc" type="text" placeholder="RFC"></ion-input>
       </ion-item>
-      <ion-item *ngIf="myForm.get('rfc').errors && (myForm.get('rfc').dirty || myForm.get('active').touched)">
-        <p color="danger" ion-text *ngIf="myForm.get('rfc').hasError('required')">Introduce un RFC</p>
-        <p color="danger" ion-text *ngIf="myForm.get('rfc').hasError('minlength')">RFC debe contener minimo 12 caracteres</p>
-        <p color="danger" ion-text *ngIf="myForm.get('rfc').hasError('maxlength')">RFC debe contener maximo 13 caracteres</p>
-        <p color="danger" ion-text *ngIf="myForm.get('rfc').hasError('pattern')">RFC inválido</p>
+      <!--
+        <ion-item *ngIf="validations_form.get('rfc').errors && (validations_form.get('rfc').dirty || validations_form.get('rfc').touched)">
+        <p color="danger" ion-text *ngIf="validations_form.get('rfc').hasError('required')">Introduce un RFC</p>
+        <p color="danger" ion-text *ngIf="validations_form.get('rfc').hasError('minlength')">RFC debe contener minimo 12 caracteres</p>
+        <p color="danger" ion-text *ngIf="validations_form.get('rfc').hasError('maxlength')">RFC debe contener maximo 13 caracteres</p>
+        <p color="danger" ion-text *ngIf="validations_form.get('rfc').hasError('pattern')">RFC inválido</p>
       </ion-item>
+      -->
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.rfc">
+            <div class="error-message" *ngIf="validations_form.get('rfc').hasError(validation.type) && (validations_form.get('rfc').dirty || validations_form.get('rfc').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+       </div>
 
       <!--Razon Social-->
       <ion-item>
-        <ion-input formControlName="company" type="text" placeholder="Razón social"></ion-input>
+        <ion-input formControlName="nombre" type="text" placeholder="Razón social"></ion-input>
       </ion-item>
-      <ion-item *ngIf="myForm.get('company').errors && (myForm.get('company').dirty || myForm.get('company').touched)">
-        <p color="danger" ion-text *ngIf="myForm.get('company').hasError('required')">Introduce un nombre o razón
+      <!--
+         <ion-item *ngIf="validations_form.get('nombre').errors && (validations_form.get('nombre').dirty || validations_form.get('nombre').touched)">
+        <p color="danger" ion-text *ngIf="validations_form.get('nombre').hasError('required')">Introduce un nombre o razón
           social</p>
       </ion-item>
+      -->
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.nombre">
+            <div class="error-message" *ngIf="validations_form.get('nombre').hasError(validation.type) && (validations_form.get('nombre').dirty || validations_form.get('nombre').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
 
       <!--Dirección-->
       <ion-item>
-        <ion-input formControlName="address" type="text" placeholder="Dirección"></ion-input>
+        <ion-input formControlName="calle" type="text" placeholder="Dirección"></ion-input>
       </ion-item>
-      <ion-item *ngIf="myForm.get('address').errors && (myForm.get('address').dirty || myForm.get('address').touched)">
-        <p color="danger" ion-text *ngIf="myForm.get('address').hasError('required')">Introduce una dirección</p>
-      </ion-item>
+      <!--
+       <ion-item *ngIf="validations_form.get('direccion').errors && (validations_form.get('direccion').dirty || validations_form.get('direccion').touched)">
+        <p color="danger" ion-text *ngIf="validations_form.get('direccion').hasError('required')">Introduce una dirección</p>
+      </ion-item> 
+      -->
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.calle">
+            <div class="error-message" *ngIf="validations_form.get('calle').hasError(validation.type) && (validations_form.get('calle').dirty || validations_form.get('calle').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
 
-      <!--Numero (Direccion)-->
+      <!--numero (Direccion)-->
       <ion-item>
-        <ion-input formControlName="num" type="text" placeholder="Número"></ion-input>
+        <ion-input formControlName="numero" type="text" placeholder="Número"></ion-input>
       </ion-item>
-      <ion-item *ngIf="myForm.get('num').errors && (myForm.get('num').dirty || myForm.get('num').touched)">
-        <p color="danger" ion-text *ngIf="myForm.get('num').hasError('required')">Introduce un numero de vivienda</p>
-        <p color="danger" ion-text *ngIf="myForm.get('num').hasError('pattern')">Número inválido</p>
-      </ion-item>
+      <!--
+      <ion-item *ngIf="validations_form.get('numero').errors && (validations_form.get('numero').dirty || validations_form.get('numero').touched)">
+        <p color="danger" ion-text *ngIf="validations_form.get('numero').hasError('required')">Introduce un numeroero de vivienda</p>
+        <p color="danger" ion-text *ngIf="validations_form.get('numero').hasError('pattern')">Número inválido</p>
+      </ion-item>  
+      -->
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.numero">
+            <div class="error-message" *ngIf="validations_form.get('numero').hasError(validation.type) && (validations_form.get('numero').dirty || validations_form.get('numero').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
 
-      <!--tel-->
+      <!--telefono-->
       <ion-item>
-        <ion-input formControlName="tel" type="text" placeholder="Teléfono"></ion-input>
+        <ion-input formControlName="telefono" type="text" placeholder="Teléfono"></ion-input>
       </ion-item>
-      <ion-item *ngIf="myForm.get('tel').errors && (myForm.get('tel').dirty || myForm.get('tel').touched)">
-        <p color="danger" ion-text *ngIf="myForm.get('tel').hasError('required')">Introduce una dirección</p>
-        <p color="danger" ion-text *ngIf="myForm.get('tel').hasError('minlength')">Teléfono debe contener 10 dígitos</p>
-        <p color="danger" ion-text *ngIf="myForm.get('tel').hasError('maxlength')">Teléfono debe contener 10 dígitos</p>
-        <p color="danger" ion-text *ngIf="myForm.get('tel').hasError('pattern')">Teléfono inválido</p>
-      </ion-item>
+      <!--
+       <ion-item *ngIf="validations_form.get('telefono').errors && (validations_form.get('telefono').dirty || validations_form.get('telefono').touched)">
+        <p color="danger" ion-text *ngIf="validations_form.get('tel').hasError('required')">Introduce una dirección</p>
+        <p color="danger" ion-text *ngIf="validations_form.get('tel').hasError('minlength')">Teléfono debe contener 10 dígitos</p>
+        <p color="danger" ion-text *ngIf="validations_form.get('tel').hasError('maxlength')">Teléfono debe contener 10 dígitos</p>
+        <p color="danger" ion-text *ngIf="validations_form.get('tel').hasError('pattern')">Teléfono inválido</p>
+      </ion-item> 
+      -->
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.telefono">
+            <div class="error-message" *ngIf="validations_form.get('telefono').hasError(validation.type) && (validations_form.get('telefono').dirty || validations_form.get('telefono').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
 
       <!-- E-mail-->
       <ion-item>
-        <ion-input formControlName="email" type="text" placeholder="E-mail"></ion-input>
+        <ion-input formControlName="correo" type="text" placeholder="E-mail"></ion-input>
       </ion-item>
-      <ion-item *ngIf="myForm.get('email').errors && (myForm.get('email').dirty || myForm.get('email').touched)">
-        <p color="danger" ion-text *ngIf="myForm.get('email').hasError('required')">Introduce un e-mail</p>
-        <p color="danger" ion-text *ngIf="myForm.get('email').hasError('email')">E-mail inválido</p>
-      </ion-item>
-
+      <!--
+      <ion-item *ngIf="validations_form.get('correo').errors && (validations_form.get('correo').dirty || validations_form.get('correo').touched)">
+        <p color="danger" ion-text *ngIf="validations_form.get('correo').hasError('required')">Introduce un e-mail</p>
+        <p color="danger" ion-text *ngIf="validations_form.get('correo').hasError('email')">E-mail inválido</p>
+      </ion-item>  
+      -->
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.correo">
+            <div class="error-message" *ngIf="validations_form.get('correo').hasError(validation.type) && (validations_form.get('correo').dirty || validations_form.get('correo').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
       <!--Activo-->
       <ion-item>
         <ion-label>Activo</ion-label>
-        <ion-checkbox formControlName="active" checked="true"></ion-checkbox>
+        <ion-checkbox formControlName="activo" checked="true"></ion-checkbox>
       </ion-item>
-      <ion-item *ngIf="myForm.get('active').errors && (myForm.get('active').dirty || myForm.get('active').touched)">
-        <p color="danger" ion-text *ngIf="myForm.get('active').hasError('required')">Seleccione una opción</p>
+      <!--
+       <ion-item *ngIf="validations_form.get('activo').errors && (validations_form.get('activo').dirty || validations_form.get('activo').touched)">
+        <p color="danger" ion-text *ngIf="validations_form.get('activo').hasError('required')">Seleccione una opción</p>
       </ion-item>
-    </ion-list>
+    </ion-list> 
+      -->
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.activo">
+            <div class="error-message" *ngIf="validations_form.get('activo').hasError(validation.type) && (validations_form.get('activo').dirty || validations_form.get('activo').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
 
     <div padding>
-      <button ion-button block type="submit" [disabled]="myForm.invalid">Guardar</button>
+      <button ion-button block type="submit" [disabled]="!validations_form.valid" (click)="showAlert()" >Guardar</button>
     </div>
 
   </form>

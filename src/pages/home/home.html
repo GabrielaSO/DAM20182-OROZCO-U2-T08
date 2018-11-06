@@ -1,14 +1,25 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Consulta
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-item ion-item *ngFor="let p of persons">
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <p>Razón Social: {{p.nombre}} </p>
+          <p>RFC: {{p.rfc}} </p>
+          <p>Calle: {{p.calle}} </p>
+          <p>Numero: {{p.numero}}</p>
+          <p>Telefono: {{p.telefono}}</p>
+          <p>Correo: {{p.correo}}</p>
+          <p>Activo: {{p.activo}}</p>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
 </ion-content>

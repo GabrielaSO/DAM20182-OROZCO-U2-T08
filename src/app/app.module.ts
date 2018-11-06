@@ -11,16 +11,15 @@ import { TabsPage} from '../pages/tabs/tabs';
 
 //Firebase Dependecies
 import { AngularFireModule } from '@angular/fire';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { FirerestProvider } from '../providers/services/firerest';
+import { FirebaseService } from '../providers/services/firebase.service';
 import * as firebase from 'firebase';
-
 import { HttpClientModule } from '@angular/common/http';
 
-var config = {
+const config = {
   apiKey: "AIzaSyAo5PGZ4BnXa2E9JeNS-WyeMRTEQMaNmcA",
   authDomain: "dam20182-orozco-u2-t08.firebaseapp.com",
   databaseURL: "https://dam20182-orozco-u2-t08.firebaseio.com",
@@ -55,7 +54,7 @@ var config = {
   providers: [
     StatusBar,
     SplashScreen,
-    FirerestProvider,
+    FirebaseService ,
     AngularFirestore,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
