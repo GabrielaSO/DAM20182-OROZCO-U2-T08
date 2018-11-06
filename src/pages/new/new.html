@@ -1,18 +1,87 @@
-<!--
-  Generated template for the NewPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>new</ion-title>
+    <ion-title>Nuevo RFC</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate>
 
+    <ion-list>
+
+      <!--RFC-->
+      <ion-item>
+        <ion-input formControlName="rfc" type="text" placeholder="RFC"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('rfc').errors && (myForm.get('rfc').dirty || myForm.get('active').touched)">
+        <p color="danger" ion-text *ngIf="myForm.get('rfc').hasError('required')">Introduce un RFC</p>
+        <p color="danger" ion-text *ngIf="myForm.get('rfc').hasError('minlength')">RFC debe contener minimo 12 caracteres</p>
+        <p color="danger" ion-text *ngIf="myForm.get('rfc').hasError('maxlength')">RFC debe contener maximo 13 caracteres</p>
+        <p color="danger" ion-text *ngIf="myForm.get('rfc').hasError('pattern')">RFC inválido</p>
+      </ion-item>
+
+      <!--Razon Social-->
+      <ion-item>
+        <ion-input formControlName="company" type="text" placeholder="Razón social"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('company').errors && (myForm.get('company').dirty || myForm.get('company').touched)">
+        <p color="danger" ion-text *ngIf="myForm.get('company').hasError('required')">Introduce un nombre o razón
+          social</p>
+      </ion-item>
+
+      <!--Dirección-->
+      <ion-item>
+        <ion-input formControlName="address" type="text" placeholder="Dirección"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('address').errors && (myForm.get('address').dirty || myForm.get('address').touched)">
+        <p color="danger" ion-text *ngIf="myForm.get('address').hasError('required')">Introduce una dirección</p>
+      </ion-item>
+
+      <!--Numero (Direccion)-->
+      <ion-item>
+        <ion-input formControlName="num" type="text" placeholder="Número"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('num').errors && (myForm.get('num').dirty || myForm.get('num').touched)">
+        <p color="danger" ion-text *ngIf="myForm.get('num').hasError('required')">Introduce un numero de vivienda</p>
+        <p color="danger" ion-text *ngIf="myForm.get('num').hasError('pattern')">Número inválido</p>
+      </ion-item>
+
+      <!--tel-->
+      <ion-item>
+        <ion-input formControlName="tel" type="text" placeholder="Teléfono"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('tel').errors && (myForm.get('tel').dirty || myForm.get('tel').touched)">
+        <p color="danger" ion-text *ngIf="myForm.get('tel').hasError('required')">Introduce una dirección</p>
+        <p color="danger" ion-text *ngIf="myForm.get('tel').hasError('minlength')">Teléfono debe contener 10 dígitos</p>
+        <p color="danger" ion-text *ngIf="myForm.get('tel').hasError('maxlength')">Teléfono debe contener 10 dígitos</p>
+        <p color="danger" ion-text *ngIf="myForm.get('tel').hasError('pattern')">Teléfono inválido</p>
+      </ion-item>
+
+      <!-- E-mail-->
+      <ion-item>
+        <ion-input formControlName="email" type="text" placeholder="E-mail"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('email').errors && (myForm.get('email').dirty || myForm.get('email').touched)">
+        <p color="danger" ion-text *ngIf="myForm.get('email').hasError('required')">Introduce un e-mail</p>
+        <p color="danger" ion-text *ngIf="myForm.get('email').hasError('email')">E-mail inválido</p>
+      </ion-item>
+
+      <!--Activo-->
+      <ion-item>
+        <ion-label>Activo</ion-label>
+        <ion-checkbox formControlName="active" checked="true"></ion-checkbox>
+      </ion-item>
+      <ion-item *ngIf="myForm.get('active').errors && (myForm.get('active').dirty || myForm.get('active').touched)">
+        <p color="danger" ion-text *ngIf="myForm.get('active').hasError('required')">Seleccione una opción</p>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block type="submit" [disabled]="myForm.invalid">Guardar</button>
+    </div>
+
+  </form>
 </ion-content>
